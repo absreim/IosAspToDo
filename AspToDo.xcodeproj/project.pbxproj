@@ -109,10 +109,10 @@
 				B353DA30255A4B3B00164782 /* SceneDelegate.swift */,
 				B353DA32255A4B3B00164782 /* ViewController.swift */,
 				B353DA34255A4B3B00164782 /* Main.storyboard */,
+				B33D2C91255CFBA5008E63E8 /* TodoItemCell.swift */,
 				B353DA37255A4B3B00164782 /* Assets.xcassets */,
 				B353DA39255A4B3B00164782 /* LaunchScreen.storyboard */,
 				B353DA3C255A4B3B00164782 /* Info.plist */,
-				B33D2C91255CFBA5008E63E8 /* TodoItemCell.swift */,
 				B300CBF7255E4A020098EC89 /* TodoItem.swift */,
 				B300CBF2255E474A0098EC89 /* TodoItemTableDataSource.swift */,
 			);
