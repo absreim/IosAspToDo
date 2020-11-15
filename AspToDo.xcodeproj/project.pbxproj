@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B300CBF3255E474A0098EC89 /* TodoItemTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B300CBF2255E474A0098EC89 /* TodoItemTableDataSource.swift */; };
 		B300CBF8255E4A020098EC89 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B300CBF7255E4A020098EC89 /* TodoItem.swift */; };
 		B33D2C92255CFBA5008E63E8 /* TodoItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33D2C91255CFBA5008E63E8 /* TodoItemCell.swift */; };
 		B353DA2F255A4B3B00164782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B353DA2E255A4B3B00164782 /* AppDelegate.swift */; };
@@ -38,7 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B300CBF2255E474A0098EC89 /* TodoItemTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemTableDataSource.swift; sourceTree = "<group>"; };
 		B300CBF7255E4A020098EC89 /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 		B33D2C91255CFBA5008E63E8 /* TodoItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemCell.swift; sourceTree = "<group>"; };
 		B353DA2B255A4B3B00164782 /* AspToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AspToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,7 +112,6 @@
 				B353DA39255A4B3B00164782 /* LaunchScreen.storyboard */,
 				B353DA3C255A4B3B00164782 /* Info.plist */,
 				B300CBF7255E4A020098EC89 /* TodoItem.swift */,
-				B300CBF2255E474A0098EC89 /* TodoItemTableDataSource.swift */,
 			);
 			path = AspToDo;
 			sourceTree = "<group>";
@@ -272,7 +269,6 @@
 				B33D2C92255CFBA5008E63E8 /* TodoItemCell.swift in Sources */,
 				B353DA31255A4B3B00164782 /* SceneDelegate.swift in Sources */,
 				B300CBF8255E4A020098EC89 /* TodoItem.swift in Sources */,
-				B300CBF3255E474A0098EC89 /* TodoItemTableDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

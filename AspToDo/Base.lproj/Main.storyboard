@@ -45,11 +45,11 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="51.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3GC-70-J0Z">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3GC-70-J0Z">
                                                             <rect key="frame" x="10" y="10" width="354" height="31.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfx-jU-AaX">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="305" height="31.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="295" height="31.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -73,6 +73,9 @@
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="8kx-cu-ho2"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                             </stackView>
