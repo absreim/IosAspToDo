@@ -45,16 +45,19 @@ class ViewController: UIViewController, UITableViewDataSource {
         let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: {
             (data, response, error) in
             guard error == nil else {
-                fatalError("Error encountered while making HTTP request.")
+                print("Error encountered when executing data task.")
+                return
             }
             guard let httpResponse = response as? HTTPURLResponse else {
                 fatalError("Reponse returned from HTTP request is not of type HTTPURLResponse.")
             }
             guard httpResponse.statusCode == 200 else {
-                fatalError("Unexpected status code in reponse to GET request.")
+                print("Unexpected status code in HTTP request:", httpResponse.statusCode)
+                return
             }
             guard data != nil else {
-                fatalError("No data in response to GET request.")
+                print("No data in response to GET request.")
+                return
             }
             let decoder = JSONDecoder()
             do {
@@ -65,7 +68,8 @@ class ViewController: UIViewController, UITableViewDataSource {
                 }
             }
             catch {
-                fatalError("Failed to decode data from API.")
+                print("Failed to decode data from API.")
+                return
             }
         })
         task.resume()
