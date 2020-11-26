@@ -54,8 +54,11 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qgF-dw-Xp5">
+                                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qgF-dw-Xp5" customClass="TodoItemCellSwitch" customModule="AspToDo" customModuleProvider="target">
                                                                     <rect key="frame" x="305" y="0.0" width="51" height="31.5"/>
+                                                                    <connections>
+                                                                        <action selector="switchValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="eY7-Ib-j3z"/>
+                                                                    </connections>
                                                                 </switch>
                                                             </subviews>
                                                         </stackView>
@@ -69,7 +72,7 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="itemDescription" destination="xfx-jU-AaX" id="vzf-SJ-GfT"/>
-                                                    <outlet property="itemDone" destination="qgF-dw-Xp5" id="IV3-Py-0bv"/>
+                                                    <outlet property="itemDone" destination="qgF-dw-Xp5" id="vjH-Mu-o0V"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>

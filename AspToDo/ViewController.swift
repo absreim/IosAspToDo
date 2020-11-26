@@ -30,8 +30,11 @@ class ViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoItemCell", for: indexPath) as! TodoItemCell
        
         // Configure the cell’s contents.
-        cell.itemDescription!.text = tableData[indexPath.row].name
-        cell.itemDone!.isOn = tableData[indexPath.row].isComplete
+        let dataRow = tableData[indexPath.row]
+        cell.itemDescription!.text = dataRow.name
+        cell.itemDone!.isOn = dataRow.isComplete
+        cell.itemDone!.itemId = dataRow.id
+        cell.itemId = dataRow.id
            
         return cell
     }
@@ -74,4 +77,45 @@ class ViewController: UIViewController, UITableViewDataSource {
         })
         task.resume()
     }
+    
+    // MARK: Actions
+    
+    @IBAction func switchValueChanged(_ sender: TodoItemCellSwitch) {
+        let id = sender.itemId!
+        let value = sender.isOn
+        
+        var foundItem: TodoItem? = nil
+        for item in tableData {
+            if id == item.id {
+                foundItem = item
+                break
+            }
+        }
+        guard foundItem != nil else {
+            print("Could not find item with id \(id).")
+            return
+        }
+        let newItem = TodoItem(id: id, name: foundItem!.name, isComplete: value)
+        let encoder = JSONEncoder()
+        var itemData: Data?
+        do {
+            itemData = try encoder.encode(newItem)
+        }
+        catch {
+            print("Failed to encode data from table.")
+            return
+        }
+        
+        let urlString = "https://absreimtodoapi.azurewebsites.net/api/TodoItems/\(id)"
+        guard let url = URL(string: urlString) else {
+            fatalError("Error creating URL object when trying to GET data from API.")
+        }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "PUT"
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpBody = itemData
+        let task = URLSession.shared.dataTask(with: urlRequest)
+        task.resume()
+    }
+    
 }
