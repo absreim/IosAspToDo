@@ -37,6 +37,7 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ad4-8h-8x1">
                                         <rect key="frame" x="0.0" y="82.5" width="374" height="686.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <gestureRecognizers/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoItemCell" id="v1I-ar-XD3" customClass="TodoItemCell" customModule="AspToDo" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="374" height="51.5"/>
@@ -81,6 +82,7 @@
                                         </connections>
                                     </tableView>
                                 </subviews>
+                                <gestureRecognizers/>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

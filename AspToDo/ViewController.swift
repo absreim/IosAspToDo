@@ -17,6 +17,17 @@ class ViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         getDataFromApi()
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action:
+                                           #selector(handleRefreshControl),
+                                           for: .valueChanged)
+    }
+    
+    @objc func handleRefreshControl() {
+        getDataFromApi()
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+        }
     }
     
     // Return the number of rows for the table.
