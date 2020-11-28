@@ -25,9 +25,6 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     @objc func handleRefreshControl() {
         getDataFromApi()
-        DispatchQueue.main.async {
-            self.tableView.refreshControl?.endRefreshing()
-        }
     }
     
     // Return the number of rows for the table.
@@ -58,32 +55,33 @@ class ViewController: UIViewController, UITableViewDataSource {
         let urlRequest = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: {
             (data, response, error) in
-            guard error == nil else {
-                print("Error encountered when executing data task.")
-                return
-            }
             guard let httpResponse = response as? HTTPURLResponse else {
                 fatalError("Reponse returned from HTTP request is not of type HTTPURLResponse.")
             }
-            guard httpResponse.statusCode == 200 else {
+            if error != nil {
+                print("Error encountered when executing data task.")
+            }
+            else if httpResponse.statusCode != 200 {
                 print("Unexpected status code in HTTP request:", httpResponse.statusCode)
-                return
             }
-            guard data != nil else {
+            else if data == nil {
                 print("No data in response to GET request.")
-                return
             }
-            let decoder = JSONDecoder()
-            do {
-                let newTableData = try decoder.decode([TodoItem].self, from: data!)
-                self.tableData = newTableData
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+            else {
+                let decoder = JSONDecoder()
+                do {
+                    let newTableData = try decoder.decode([TodoItem].self, from: data!)
+                    self.tableData = newTableData
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+                catch {
+                    print("Failed to decode data from API.")
                 }
             }
-            catch {
-                print("Failed to decode data from API.")
-                return
+            DispatchQueue.main.async {
+                self.tableView.refreshControl?.endRefreshing()
             }
         })
         task.resume()
