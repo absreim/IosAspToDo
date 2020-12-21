@@ -6,7 +6,7 @@
 //
 
 struct TodoItem: Codable {
-    var id: Int
+    var id: String
     var name: String
     var isComplete: Bool
 }

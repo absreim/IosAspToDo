@@ -8,7 +8,7 @@
 import UIKit
 
 class TodoItemCell: UITableViewCell {
-    var itemId: Int?
+    var itemId: String?
     @IBOutlet weak var itemDescription: UILabel!
     @IBOutlet weak var itemDone: TodoItemCellSwitch!
 }

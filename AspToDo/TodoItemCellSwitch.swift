@@ -8,5 +8,5 @@
 import UIKit
 
 class TodoItemCellSwitch: UISwitch {
-    var itemId: Int?
+    var itemId: String?
 }

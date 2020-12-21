@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.navigationItem.leftBarButtonItem = editButtonItem
         getDataFromApi()
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action:
@@ -25,6 +26,11 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     @objc func handleRefreshControl() {
         getDataFromApi()
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
     }
     
     // Return the number of rows for the table.
