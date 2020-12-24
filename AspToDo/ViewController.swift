@@ -53,6 +53,22 @@ class ViewController: UIViewController, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let itemId = tableData[indexPath.row].id
+        
+        tableData.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        
+        let urlString = "https://absreimtodoapi.azurewebsites.net/api/TodoItems/\(itemId)"
+        guard let url = URL(string: urlString) else {
+            fatalError("Error creating URL object when trying to GET data from API.")
+        }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "DELETE"
+        let task = URLSession.shared.dataTask(with: urlRequest)
+        task.resume()
+    }
+    
     private func getDataFromApi() {
         let urlString = "https://absreimtodoapi.azurewebsites.net/api/TodoItems"
         guard let url = URL(string: urlString) else {
