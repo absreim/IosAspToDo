@@ -149,4 +149,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         task.resume()
     }
     
+    // MARK: Segues
+    
+    @IBAction func cancelUnwindAction(unwindSegue: UIStoryboardSegue) {}
 }
