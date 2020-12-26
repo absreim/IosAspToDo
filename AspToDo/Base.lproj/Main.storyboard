@@ -115,7 +115,7 @@
         <!--List Item-->
         <scene sceneID="XFC-nT-Cr4">
             <objects>
-                <viewController id="udg-l9-ZrU" sceneMemberID="viewController">
+                <viewController id="udg-l9-ZrU" customClass="ListItemViewController" customModule="AspToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wud-zZ-NIF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -198,8 +198,17 @@
                                 <segue destination="RXD-kB-zfE" kind="unwind" unwindAction="cancelUnwindActionWithUnwindSegue:" id="wAm-Vf-WGN"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="sLE-w1-7XP"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="sLE-w1-7XP">
+                            <connections>
+                                <segue destination="RXD-kB-zfE" kind="unwind" unwindAction="saveUnwindActionWithUnwindSegue:" id="Pal-PN-GV2"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="descriptionTextField" destination="Dkm-zC-8WZ" id="QIQ-BT-9Pt"/>
+                        <outlet property="doneSwitch" destination="nX9-pn-eJB" id="muz-VD-CoY"/>
+                        <outlet property="idTextField" destination="VLR-SS-Wru" id="KEB-gO-Pdh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="djr-bR-P0e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="RXD-kB-zfE" userLabel="Exit" sceneMemberID="exit"/>

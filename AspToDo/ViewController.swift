@@ -69,6 +69,8 @@ class ViewController: UIViewController, UITableViewDataSource {
         task.resume()
     }
     
+    // MARK: Network utility functions
+    
     private func getDataFromApi() {
         let urlString = "https://absreimtodoapi.azurewebsites.net/api/TodoItems"
         guard let url = URL(string: urlString) else {
@@ -109,6 +111,29 @@ class ViewController: UIViewController, UITableViewDataSource {
         task.resume()
     }
     
+    private func postItem(item: TodoItem) {
+        let encoder = JSONEncoder()
+        var itemData: Data?
+        do {
+            itemData = try encoder.encode(item)
+        }
+        catch {
+            print("Failed to encode data to post.")
+            return
+        }
+        
+        let urlString = "https://absreimtodoapi.azurewebsites.net/api/TodoItems"
+        guard let url = URL(string: urlString) else {
+            fatalError("Error creating URL object when trying to POST data to API.")
+        }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpBody = itemData
+        let task = URLSession.shared.dataTask(with: urlRequest)
+        task.resume()
+    }
+    
     // MARK: Actions
     
     @IBAction func switchValueChanged(_ sender: TodoItemCellSwitch) {
@@ -139,7 +164,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         let urlString = "https://absreimtodoapi.azurewebsites.net/api/TodoItems/\(id)"
         guard let url = URL(string: urlString) else {
-            fatalError("Error creating URL object when trying to GET data from API.")
+            fatalError("Error creating URL object when trying to PUT data to API.")
         }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "PUT"
@@ -152,4 +177,15 @@ class ViewController: UIViewController, UITableViewDataSource {
     // MARK: Segues
     
     @IBAction func cancelUnwindAction(unwindSegue: UIStoryboardSegue) {}
+    
+    @IBAction func saveUnwindAction(unwindSegue: UIStoryboardSegue) {
+        let listItemModal = unwindSegue.source as! ListItemViewController
+        let newItemId = listItemModal.idTextField.text!
+        let newItemDescription = listItemModal.descriptionTextField.text!
+        let newItemDone = listItemModal.doneSwitch.isOn
+        let newTodoItem = TodoItem(id: newItemId, name: newItemDescription, isComplete: newItemDone)
+        tableData.append(newTodoItem)
+        tableView.reloadData()
+        postItem(item: newTodoItem)
+    }
 }
