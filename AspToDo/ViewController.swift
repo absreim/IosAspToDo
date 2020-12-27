@@ -152,6 +152,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         task.resume()
     }
     
+    private func putItem(item: TodoItem) {
+        let encoder = JSONEncoder()
+        var itemData: Data?
+        do {
+            itemData = try encoder.encode(item)
+        }
+        catch {
+            print("Failed to encode data to post.")
+            return
+        }
+        
+        let urlString = "https://absreimtodoapi.azurewebsites.net/api/TodoItems/\(item.id)"
+        guard let url = URL(string: urlString) else {
+            fatalError("Error creating URL object when trying to PUT data to API.")
+        }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "PUT"
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpBody = itemData
+        let task = URLSession.shared.dataTask(with: urlRequest)
+        task.resume()
+    }
+    
     // MARK: Actions
     
     @IBAction func switchValueChanged(_ sender: TodoItemCellSwitch) {
@@ -170,26 +193,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return
         }
         let newItem = TodoItem(id: id, name: foundItem!.name, isComplete: value)
-        let encoder = JSONEncoder()
-        var itemData: Data?
-        do {
-            itemData = try encoder.encode(newItem)
-        }
-        catch {
-            print("Failed to encode data from table.")
-            return
-        }
-        
-        let urlString = "https://absreimtodoapi.azurewebsites.net/api/TodoItems/\(id)"
-        guard let url = URL(string: urlString) else {
-            fatalError("Error creating URL object when trying to PUT data to API.")
-        }
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "PUT"
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpBody = itemData
-        let task = URLSession.shared.dataTask(with: urlRequest)
-        task.resume()
+        putItem(item: newItem)
     }
     
     // MARK: Segues
@@ -202,8 +206,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let newItemDescription = listItemModal.descriptionTextField.text!
         let newItemDone = listItemModal.doneSwitch.isOn
         let newTodoItem = TodoItem(id: newItemId, name: newItemDescription, isComplete: newItemDone)
-        tableData.append(newTodoItem)
+        let editing = listItemModal.editMode
+        
+        if editing {
+            let existingIndex = tableData.firstIndex(where: {
+                element in
+                return element.id == newItemId
+            })
+            if existingIndex != nil {
+                tableData[existingIndex!] = newTodoItem
+            }
+            putItem(item: newTodoItem)
+        }
+        else {
+            tableData.append(newTodoItem)
+            postItem(item: newTodoItem)
+        }
+
         tableView.reloadData() // TODO: Try to visually insert the cell instead of reloading the table
-        postItem(item: newTodoItem)
     }
 }

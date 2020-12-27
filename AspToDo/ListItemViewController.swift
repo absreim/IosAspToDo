@@ -21,6 +21,7 @@ class ListItemViewController: UIViewController {
     
     override func viewDidLoad() {
         idTextField.text = initialId
+        idTextField.isEnabled = !editMode
         descriptionTextField.text = initialDescription
         doneSwitch.isOn = initialDone
         navbar.title = editMode ? "Edit Item" : "Add Item"
