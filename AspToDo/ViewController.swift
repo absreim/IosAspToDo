@@ -26,11 +26,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editListItem" {
-            let destination = segue.destination as! ListItemViewController
+            let listItemNavController = segue.destination as! UINavigationController
+            let listItemViewController = listItemNavController.viewControllers.first as! ListItemViewController
             let todoListItem = sender as! TodoItem
-            destination.initialId = todoListItem.id
-            destination.initialDescription = todoListItem.name
-            destination.initialDone = todoListItem.isComplete
+            listItemViewController.initialId = todoListItem.id
+            listItemViewController.initialDescription = todoListItem.name
+            listItemViewController.initialDone = todoListItem.isComplete
         }
     }
     
