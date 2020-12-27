@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,6 +22,16 @@ class ViewController: UIViewController, UITableViewDataSource {
         tableView.refreshControl?.addTarget(self, action:
                                            #selector(handleRefreshControl),
                                            for: .valueChanged)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "editListItem" {
+            let destination = segue.destination as! ListItemViewController
+            let todoListItem = sender as! TodoItem
+            destination.initialId = todoListItem.id
+            destination.initialDescription = todoListItem.name
+            destination.initialDone = todoListItem.isComplete
+        }
     }
     
     @objc func handleRefreshControl() {
@@ -67,6 +77,12 @@ class ViewController: UIViewController, UITableViewDataSource {
         urlRequest.httpMethod = "DELETE"
         let task = URLSession.shared.dataTask(with: urlRequest)
         task.resume()
+    }
+    
+    // MARK: UITableViewDelegate functions
+    
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        performSegue(withIdentifier: "editListItem", sender: tableData[indexPath.row])
     }
     
     // MARK: Network utility functions
@@ -185,7 +201,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         let newItemDone = listItemModal.doneSwitch.isOn
         let newTodoItem = TodoItem(id: newItemId, name: newItemDescription, isComplete: newItemDone)
         tableData.append(newTodoItem)
-        tableView.reloadData()
+        tableView.reloadData() // TODO: Try to visually insert the cell instead of reloading the table
         postItem(item: newTodoItem)
     }
 }
