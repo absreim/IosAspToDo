@@ -210,6 +210,7 @@
                         <outlet property="descriptionTextField" destination="Dkm-zC-8WZ" id="QIQ-BT-9Pt"/>
                         <outlet property="doneSwitch" destination="nX9-pn-eJB" id="muz-VD-CoY"/>
                         <outlet property="idTextField" destination="VLR-SS-Wru" id="KEB-gO-Pdh"/>
+                        <outlet property="navbar" destination="YzO-pa-IOW" id="nZa-1c-ick"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="djr-bR-P0e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

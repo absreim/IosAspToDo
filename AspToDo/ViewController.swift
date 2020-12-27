@@ -32,6 +32,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             listItemViewController.initialId = todoListItem.id
             listItemViewController.initialDescription = todoListItem.name
             listItemViewController.initialDone = todoListItem.isComplete
+            listItemViewController.editMode = true
         }
     }
     
